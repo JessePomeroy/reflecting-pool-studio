@@ -102,9 +102,6 @@ export const printCollection = defineType({
       featured: "featured",
     },
     prepare({ title, media, description, parentTitle, featured }) {
-      // Product count would require a back-reference query (not available in
-      // preview.select). Deferred to the documents-pane PR. For now we surface
-      // hierarchy + description so the list view is at least informative.
       const parts: string[] = [];
       if (parentTitle) parts.push(`↳ ${parentTitle}`);
       else parts.push("Top-level");

@@ -30,6 +30,7 @@ import {
   PAPER_DROPDOWN_OPTIONS,
   SIZE_DROPDOWN_OPTIONS,
 } from "./constants/lumaprintsCatalog";
+import { canvasSizeValidation } from "./shared/canvasValidation";
 
 export const lumaPrintSetV2 = defineType({
   name: "lumaPrintSetV2",
@@ -135,18 +136,7 @@ export const lumaPrintSetV2 = defineType({
               title: "Size",
               type: "string",
               options: { list: SIZE_DROPDOWN_OPTIONS },
-              validation: (rule) =>
-                rule.required().custom((size, context) => {
-                  const parent = context.parent as { paper?: string } | undefined;
-                  if (
-                    parent?.paper?.startsWith("canvas-") &&
-                    size &&
-                    ["4x6", "5x7", "6x9"].includes(size)
-                  ) {
-                    return "Canvas is only available in 8×10 and larger.";
-                  }
-                  return true;
-                }),
+              validation: (rule) => rule.required().custom(canvasSizeValidation),
             }),
             defineField({
               name: "retailPrice",

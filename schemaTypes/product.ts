@@ -8,7 +8,8 @@
  */
 
 import { defineField, defineType } from "sanity";
-import { PAPER_DROPDOWN_OPTIONS, SIZE_DROPDOWN_OPTIONS } from "./constants/lumaprintsCatalog";
+import { PRODUCT_CATEGORIES } from "./shared/categoryOptions";
+import { seoFields } from "./shared/seoFields";
 
 export const product = defineType({
   name: "product",
@@ -92,7 +93,7 @@ export const product = defineType({
       type: "number",
       group: "pricing",
       validation: (rule) => rule.positive(),
-      description: "Base price in USD. Optional if paper-specific prices are set.",
+      description: "Base price in USD.",
     }),
 
     defineField({
@@ -101,13 +102,7 @@ export const product = defineType({
       group: "pricing",
       type: "string",
       options: {
-        list: [
-          { title: "Prints", value: "prints" },
-          { title: "Postcards", value: "postcards" },
-          { title: "Tapestries", value: "tapestries" },
-          { title: "Digital", value: "digital" },
-          { title: "Merchandise", value: "merchandise" },
-        ],
+        list: PRODUCT_CATEGORIES,
       },
     }),
 
@@ -119,75 +114,6 @@ export const product = defineType({
       to: [{ type: "printCollection" }],
       hidden: ({ parent }) => parent?.category !== "prints",
       description: "Link this print to a collection (shown on /shop/prints/[slug])",
-    }),
-
-    defineField({
-      name: "fulfillmentType",
-      title: "Fulfillment Type",
-      type: "string",
-      group: "pricing",
-      options: {
-        list: [
-          { title: "LumaPrints", value: "lumaprints" },
-          { title: "Self-fulfilled", value: "self" },
-        ],
-      },
-      initialValue: "self",
-      description:
-        "LumaPrints = auto-submit when order is placed. Self = handle fulfillment manually.",
-    }),
-
-    defineField({
-      name: "availablePapers",
-      title: "Available Paper Types",
-      type: "array",
-      group: "pricing",
-      of: [
-        {
-          type: "object",
-          fields: [
-            {
-              name: "name",
-              title: "Size & Paper",
-              type: "string",
-              options: {
-                list: PAPER_DROPDOWN_OPTIONS.flatMap((paper) =>
-                  SIZE_DROPDOWN_OPTIONS.map((size) => ({
-                    title: `${paper.title} ${size.title}`,
-                    value: `${paper.value}|${size.value}`,
-                  })),
-                ),
-              },
-            },
-            {
-              name: "price",
-              title: "Price (USD)",
-              type: "number",
-              description: "Price for this paper type and size. Overrides the base product price.",
-              validation: (rule: any) => rule.required().positive(),
-            },
-          ],
-          preview: {
-            select: {
-              name: "name",
-              price: "price",
-            },
-            prepare(value: any) {
-              const name = value?.name?.split("|")[0] || "Paper option";
-              const price = value?.price;
-              return {
-                title: name,
-                subtitle: price ? `$${price}` : "No price set",
-              };
-            },
-          },
-        },
-      ],
-      options: {
-        modal: { type: "popover" },
-      },
-      hidden: ({ parent }) => parent?.fulfillmentType !== "lumaprints",
-      description: "Add paper options. All sizes are 2:3 ratio for your images.",
     }),
 
     defineField({
@@ -229,32 +155,9 @@ export const product = defineType({
       description: "Highlight this product?",
     }),
 
-    defineField({
-      name: "seo",
-      title: "SEO",
-      type: "object",
-      group: "seo",
-      fields: [
-        {
-          name: "description",
-          title: "Meta Description",
-          type: "text",
-          rows: 3,
-          description:
-            "Shows in Google search results under the page title. Keep under 160 characters.",
-          validation: (rule: any) => rule.max(160),
-        },
-        {
-          name: "ogImage",
-          title: "Social Image",
-          type: "image",
-          description: "Override for social sharing (defaults to first product image)",
-        },
-      ],
-    }),
+    ...seoFields,
   ],
 
-  // Preview in document lists shows title, thumbnail, price, and category.
   preview: {
     select: {
       title: "title",

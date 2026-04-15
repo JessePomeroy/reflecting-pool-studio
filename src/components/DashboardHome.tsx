@@ -20,13 +20,28 @@ export function DashboardHome() {
   const client = useClient({ apiVersion: "2024-01-01" });
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    client.fetch(STATS_QUERY).then((result) => {
-      setStats(result);
-      setLoading(false);
-    });
+    client
+      .fetch(STATS_QUERY)
+      .then((result) => {
+        setStats(result);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : "Failed to load dashboard stats");
+        setLoading(false);
+      });
   }, [client]);
+
+  if (error) {
+    return (
+      <div style={styles.container}>
+        <p style={styles.error}>Something went wrong: {error}</p>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -82,20 +97,13 @@ function StatCard({
   label,
   value,
   suffix,
-  highlight,
 }: {
   label: string;
   value: number;
   suffix?: string;
-  highlight?: boolean;
 }) {
   return (
-    <div
-      style={{
-        ...styles.card,
-        borderColor: highlight ? "#ef4444" : "#333",
-      }}
-    >
+    <div style={styles.card}>
       <div style={styles.cardValue}>
         {value}
         {suffix && <span style={styles.cardSuffix}> {suffix}</span>}
@@ -125,6 +133,10 @@ const styles: Record<string, React.CSSProperties> = {
   },
   loading: {
     color: "#999",
+    fontSize: "0.95rem",
+  },
+  error: {
+    color: "#ef4444",
     fontSize: "0.95rem",
   },
   grid: {

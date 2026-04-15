@@ -30,7 +30,7 @@ import type { FieldProps } from "sanity";
 import { useFormValue } from "sanity";
 import { getFrameWholesaleCost, getWholesaleCost } from "../constants/lumaprintsCatalog";
 
-interface VariantContext {
+export interface VariantContext {
   paper?: string;
   size?: string;
 }

@@ -1,21 +1,10 @@
-/**
- * Gallery Schema
- *
- * Defines the structure for photo galleries in the CMS.
- * Galleries can be reordered via drag-and-drop in the Studio.
- *
- * Used on: /gallery, /gallery/[slug]
- */
-
 import { orderRankField } from "@sanity/orderable-document-list";
 import { defineField, defineType } from "sanity";
+import { seoFields } from "./shared/seoFields";
 
 export const gallery = defineType({
-  // API name — used in GROQ queries: *[_type == "gallery"]
   name: "gallery",
-  // Display name in Studio UI
   title: "Gallery",
-  // Document type (as opposed to 'object' which is embedded)
   type: "document",
 
   groups: [
@@ -26,7 +15,6 @@ export const gallery = defineType({
   ],
 
   fields: [
-    // Hidden field that stores the sort order for drag-and-drop
     // Query with: | order(orderRank)
     orderRankField({ type: "gallery" }),
 
@@ -62,7 +50,7 @@ export const gallery = defineType({
         {
           type: "image",
           options: {
-            hotspot: true, // Enables focal point cropping in Studio
+            hotspot: true,
           },
           fields: [
             {
@@ -75,7 +63,7 @@ export const gallery = defineType({
         },
       ],
       options: {
-        layout: "grid", // Display as grid instead of list in Studio
+        layout: "grid",
       },
       validation: (rule) => rule.required(),
     }),
@@ -140,32 +128,9 @@ export const gallery = defineType({
       description: "Uncheck to hide this gallery from the public site",
     }),
 
-    defineField({
-      name: "seo",
-      title: "SEO",
-      type: "object",
-      group: "seo",
-      fields: [
-        {
-          name: "description",
-          title: "Meta Description",
-          type: "text",
-          rows: 3,
-          description:
-            "Shows in Google search results under the page title. Keep under 160 characters.",
-          validation: (rule: any) => rule.max(160),
-        },
-        {
-          name: "ogImage",
-          title: "Social Image",
-          type: "image",
-          description: "Override for social sharing (defaults to first gallery image)",
-        },
-      ],
-    }),
+    ...seoFields,
   ],
 
-  // How this document appears in lists in the Studio
   preview: {
     select: {
       title: "title",

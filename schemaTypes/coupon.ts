@@ -16,6 +16,7 @@
  */
 
 import { defineField, defineType } from "sanity";
+import { PRODUCT_CATEGORIES } from "./shared/categoryOptions";
 
 export const coupon = defineType({
   name: "coupon",
@@ -65,13 +66,7 @@ export const coupon = defineType({
       type: "array",
       of: [{ type: "string" }],
       options: {
-        list: [
-          { title: "Prints", value: "prints" },
-          { title: "Postcards", value: "postcards" },
-          { title: "Tapestries", value: "tapestries" },
-          { title: "Digital", value: "digital" },
-          { title: "Merchandise", value: "merchandise" },
-        ],
+        list: PRODUCT_CATEGORIES,
       },
       description: "Leave empty to allow all categories, or select specific categories",
     }),

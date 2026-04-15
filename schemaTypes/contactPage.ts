@@ -9,6 +9,7 @@
 
 import { EnvelopeIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
+import { seoFields } from "./shared/seoFields";
 
 export const contactPage = defineType({
   name: "contactPage",
@@ -107,25 +108,7 @@ export const contactPage = defineType({
       ],
     }),
 
-    defineField({
-      name: "seo",
-      title: "SEO",
-      type: "object",
-      fields: [
-        {
-          name: "description",
-          title: "Meta Description",
-          type: "text",
-          rows: 3,
-          validation: (rule: any) => rule.max(160),
-        },
-        {
-          name: "ogImage",
-          title: "Social Image",
-          type: "image",
-        },
-      ],
-    }),
+    ...seoFields,
   ],
 
   preview: {

@@ -19,6 +19,7 @@ import DocumentsPane from "sanity-plugin-documents-pane";
 import { media } from "sanity-plugin-media";
 import { clientConfig } from "./client.config";
 import { schemaTypes } from "./schemaTypes";
+import { PRODUCT_CATEGORIES } from "./schemaTypes/shared/categoryOptions";
 import { MarkBackInStockAction } from "./schemaTypes/actions/MarkBackInStockAction";
 import { MarkSoldOutAction } from "./schemaTypes/actions/MarkSoldOutAction";
 import { DashboardHome } from "./src/components/DashboardHome";
@@ -110,18 +111,8 @@ export default defineConfig({
                       .child(
                         S.documentList()
                           .title("Missing pricing")
-                          // A product is missing pricing if:
-                          //   - fulfillmentType=lumaprints  → needs availablePapers entries
-                          //   - fulfillmentType=self (default) → needs a base price
-                          // Prints often leave the base price blank because each
-                          // paper variant has its own price; don't false-flag them.
                           .schemaType("product")
-                          .filter(
-                            '_type == "product" && (' +
-                              '(fulfillmentType == "lumaprints" && (!defined(availablePapers) || count(availablePapers) == 0))' +
-                              ' || (fulfillmentType != "lumaprints" && !defined(price))' +
-                              ")",
-                          )
+                          .filter('_type == "product" && !defined(price)')
                           .defaultOrdering([{ field: "_updatedAt", direction: "desc" }]),
                       ),
                     S.listItem()
@@ -213,18 +204,20 @@ export default defineConfig({
                       context,
                     }),
                     S.divider(),
-                    ...["postcards", "tapestries", "digital", "merchandise"].map((cat) =>
-                      S.listItem()
-                        .title(cat.charAt(0).toUpperCase() + cat.slice(1))
-                        .child(
-                          S.documentList()
-                            .title(cat.charAt(0).toUpperCase() + cat.slice(1))
-                            .schemaType("product")
-                            .filter('_type == "product" && category == $category')
-                            .params({ category: cat })
-                            .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
-                        ),
-                    ),
+                    ...PRODUCT_CATEGORIES
+                      .filter((c) => c.value !== "prints")
+                      .map((c) =>
+                        S.listItem()
+                          .title(c.title)
+                          .child(
+                            S.documentList()
+                              .title(c.title)
+                              .schemaType("product")
+                              .filter('_type == "product" && category == $category')
+                              .params({ category: c.value })
+                              .defaultOrdering([{ field: "orderRank", direction: "asc" }]),
+                          ),
+                      ),
                     S.divider(),
                     S.listItem()
                       .title("Coupons")

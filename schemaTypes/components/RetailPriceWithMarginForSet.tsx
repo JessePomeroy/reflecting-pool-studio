@@ -22,12 +22,7 @@ import { Stack, Text } from "@sanity/ui";
 import type { FieldProps } from "sanity";
 import { useFormValue } from "sanity";
 import { getWholesaleCost } from "../constants/lumaprintsCatalog";
-import { computeFeeBreakdown } from "./RetailPriceWithMargin";
-
-interface VariantContext {
-  paper?: string;
-  size?: string;
-}
+import { computeFeeBreakdown, type VariantContext } from "./RetailPriceWithMargin";
 
 export function RetailPriceWithMarginForSet(props: FieldProps) {
   // Read the parent variant (one path segment up from the retailPrice field).

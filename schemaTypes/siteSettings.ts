@@ -9,6 +9,7 @@
 
 import { CogIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
+import { seoFields } from "./shared/seoFields";
 
 export const siteSettings = defineType({
   name: "siteSettings",
@@ -91,34 +92,21 @@ export const siteSettings = defineType({
       ],
     }),
 
-    defineField({
-      name: "seo",
+    {
+      ...seoFields[0],
       title: "Default SEO",
-      type: "object",
       description: "Fallback meta tags when pages don't set their own",
       fields: [
-        {
-          name: "description",
-          title: "Meta Description",
-          type: "text",
-          rows: 3,
-          validation: (rule: any) => rule.max(160),
-        },
-        {
-          name: "ogImage",
-          title: "Default Social Image",
-          type: "image",
-          description: "Used when sharing links on social media (1200×630 recommended)",
-        },
-        {
+        ...seoFields[0].fields,
+        defineField({
           name: "keywords",
           title: "Keywords",
           type: "array",
           of: [{ type: "string" }],
           options: { layout: "tags" },
-        },
+        }),
       ],
-    }),
+    },
   ],
 
   preview: {

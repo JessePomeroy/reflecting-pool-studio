@@ -1,17 +1,7 @@
-/**
- * About Schema
- *
- * Defines the structure for the About page content.
- * This is typically a singleton (one document) containing
- * bio information, portrait, and social links.
- *
- * Used on: /about
- */
-
 import { defineField, defineType } from "sanity";
+import { seoFields } from "./shared/seoFields";
 
 export const about = defineType({
-  // API name — used in GROQ queries: *[_type == "about"][0]
   name: "about",
   title: "About",
   type: "document",
@@ -24,7 +14,6 @@ export const about = defineType({
       validation: (rule) => rule.required(),
     }),
 
-    // Role or title displayed under name
     defineField({
       name: "title",
       title: "Title/Role",
@@ -32,17 +21,15 @@ export const about = defineType({
       description: 'e.g., "Photographer" or "Multidisciplinary Artist"',
     }),
 
-    // Portrait photo for the about page
     defineField({
       name: "portrait",
       title: "Portrait",
       type: "image",
       options: {
-        hotspot: true, // Enable focal point for cropping
+        hotspot: true,
       },
     }),
 
-    // Short bio for display on the page
     defineField({
       name: "shortBio",
       title: "Short Bio",
@@ -51,16 +38,14 @@ export const about = defineType({
       description: "Brief intro, 2-3 sentences",
     }),
 
-    // Full bio using Portable Text (rich text with formatting)
     defineField({
       name: "fullBio",
       title: "Full Bio",
       type: "array",
-      of: [{ type: "block" }], // Portable Text blocks
+      of: [{ type: "block" }],
       description: "Longer bio with formatting (optional)",
     }),
 
-    // Social links grouped as an object
     defineField({
       name: "social",
       title: "Social Links",
@@ -85,28 +70,9 @@ export const about = defineType({
       ],
     }),
 
-    defineField({
-      name: "seo",
-      title: "SEO",
-      type: "object",
-      fields: [
-        {
-          name: "description",
-          title: "Meta Description",
-          type: "text",
-          rows: 3,
-          validation: (rule: any) => rule.max(160),
-        },
-        {
-          name: "ogImage",
-          title: "Social Image",
-          type: "image",
-        },
-      ],
-    }),
+    ...seoFields,
   ],
 
-  // Preview shows name and portrait
   preview: {
     select: {
       title: "name",

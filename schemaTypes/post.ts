@@ -1,40 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-/**
- * Blog Post Schema with Template Support
- *
- * This schema supports multiple post types, each with unique template-specific fields.
- * The postType field determines which frontend template renders the post.
- *
- * === Post Types ===
- *
- * standard (default):
- * - Simple blog layout with featured image and body content
- * - No template-specific fields needed
- *
- * caseStudy:
- * - Structured layout: The Brief → The Approach → The Result
- * - Fields: brief, approach, result
- *
- * behindTheScenes:
- * - Narrative-focused layout with full-width images
- * - No template-specific fields (uses body only)
- *
- * technical:
- * - Technical write-up with gear grid
- * - Fields: gearUsed (array of {camera, lens, filmStock, developer})
- *
- * clientStory:
- * - Wedding/event story with hero header and testimonials
- * - Fields: brief, approach, result
- *
- * === Adding a New Post Type ===
- *
- * 1. Add entry to postType options list below
- * 2. Create template component in the frontend's src/lib/components/templates/
- * 3. Import and add case in the frontend's src/routes/blog/[slug]/+page.svelte
- * 4. Add any template-specific fields (use hidden property to show conditionally)
- */
+/** Blog post schema with template support (standard, caseStudy, behindTheScenes, technical, clientStory). */
 
 export default defineType({
   name: "post",
