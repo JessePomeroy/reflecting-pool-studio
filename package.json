@@ -1,0 +1,54 @@
+{
+  "name": "reflecting-pool-studio",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/icons": "^3.7.4",
+    "@sanity/orderable-document-list": "^1.5.0",
+    "@sanity/presentation": "^2.0.0",
+    "@sanity/ui": "^3.1.14",
+    "@sanity/vision": "^5.20.0",
+    "react": "^19.1",
+    "react-dom": "^19.1",
+    "sanity": "^5.20.0",
+    "sanity-plugin-documents-pane": "^3.0.2",
+    "sanity-plugin-media": "^4.1.1",
+    "styled-components": "^6.1.18"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.4",
+    "@sanity/eslint-config-studio": "^6.0.0",
+    "@types/react": "^19.1",
+    "eslint": "^9.28",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.1",
+    "prettier": "^3.5",
+    "typescript": "^5.8"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --max-warnings=0"
+    ]
+  }
+}
