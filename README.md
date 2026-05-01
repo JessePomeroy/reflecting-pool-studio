@@ -1,8 +1,15 @@
-# Photographer Sanity Studio — Template
+# reflecting-pool-studio
 
-A customized Sanity Studio designed as the content layer for a photographer
-SaaS. Clone this repo for each new photographer client — edit one file and
-deploy.
+Maggie Pomeroy's Sanity Studio — the content layer for
+[reflecting-pool](https://github.com/JessePomeroy/reflecting-pool), her
+photographer site. Cloned from
+[`sanity-studio-template`](https://github.com/JessePomeroy/sanity-studio-template),
+which is the canonical upstream for shared schemas, desk structure, and
+custom components.
+
+> **Looking for the template?** Schema or desk-structure changes intended
+> for all photographer clients should land in `sanity-studio-template`
+> first, then flow down here. Don't fork schemas in this repo.
 
 ## What lives here
 
@@ -20,41 +27,12 @@ deploy.
 - **Presentation tool** wired with draft mode toggle for visual editing
 - **Back-reference tabs** on galleries, products, and collections
 
-## Cloning for a new client
-
-The only file you should need to edit is **`client.config.ts`** at the repo
-root. Everything photographer-specific is sourced from there.
-
-1. Clone this repo and create a fresh repo:
-   ```bash
-   git clone git@github.com:jessepomeroy/reflecting-pool-studio.git clientname-studio
-   cd clientname-studio
-   rm -rf .git && git init
-   git remote add origin git@github.com:jessepomeroy/clientname-studio.git
-   ```
-2. Create a Sanity project for the client at https://sanity.io/manage and
-   note the new `projectId`.
-3. Edit `client.config.ts`:
-   - `projectId` → new project ID
-   - `dataset` → usually `production`
-   - `studioTitle` / `dashboardHeading` / `dashboardSubtitle` → client branding
-   - `liveSiteUrl` / `adminDashboardUrl` → client's deployed URLs
-   - `appId` → leave empty until first deploy
-4. Edit `package.json` `name` field to match the new repo.
-5. Deploy:
-   ```bash
-   pnpm install
-   pnpm sanity deploy
-   ```
-   Sanity will prompt for a studio hostname and assign a new `appId`. Copy
-   that `appId` into `client.config.ts` so future deploys are non-interactive.
-
-**All schemas, desk customization, custom components, and actions are
-inherited automatically.**
+Per-client values (project ID, studio title, live site URL, etc.) live
+in `client.config.ts`.
 
 ## Environment variables (optional)
 
-Create a `.env` file to override default fee calculations for client studios
+Create a `.env` file to override default fee calculations for studios
 using Stripe Connect:
 
 ```

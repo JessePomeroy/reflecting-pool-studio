@@ -1,6 +1,14 @@
 # AGENTS.md — reflecting-pool-studio
 
-Template Sanity Studio for the photographer SaaS platform. Clone this repo for each new photographer client.
+Maggie Pomeroy's Sanity Studio — the live content layer for
+[reflecting-pool](https://github.com/JessePomeroy/reflecting-pool).
+
+**This is a client instance, not the template.** Schema/desk/component
+changes that should apply to all photographer clients belong in
+[`sanity-studio-template`](https://github.com/JessePomeroy/sanity-studio-template)
+upstream — land them there, then sync down. Treat this repo as
+downstream for everything except `client.config.ts` and Maggie-specific
+content.
 
 ---
 
@@ -87,8 +95,9 @@ pnpm sanity deploy   # Deploy Studio to sanity.io
 
 ## Platform Context
 
-This studio is the template for the photographer CRM platform:
-- **reflecting-pool** = SvelteKit template site
-- **reflecting-pool-studio** = Sanity CMS template (this repo)
+This studio is one instance of the photographer CRM platform:
+- **reflecting-pool** = SvelteKit spoke site (Maggie's, this studio's frontend)
+- **sanity-studio-template** = Sanity CMS template (upstream of this repo)
+- **reflecting-pool-studio** = this repo (Maggie's instance)
 - **@jessepomeroy/admin** = shared admin dashboard package
 - **Convex** = operational backend (orders, CRM, messages, notifications)
