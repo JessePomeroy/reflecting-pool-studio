@@ -12,17 +12,17 @@
 export const clientConfig = {
   // ─── Sanity project ─────────────────────────────────────────────
   /** Sanity project ID — find in https://sanity.io/manage */
-  projectId: "YOUR_SANITY_PROJECT_ID",
+  projectId: "syajs0gs",
   /** Dataset name — usually "production" */
   dataset: "production",
 
   // ─── Studio branding ────────────────────────────────────────────
   /** Title shown in the studio's top-left and browser tab */
-  studioTitle: "Studio",
+  studioTitle: "Reflecting Pool",
   /** Heading shown on the dashboard home pane */
-  dashboardHeading: "Studio",
+  dashboardHeading: "Reflecting Pool",
   /** Subtitle shown under the dashboard heading */
-  dashboardSubtitle: "Welcome back. Here's your overview.",
+  dashboardSubtitle: "Welcome back, Maggie. Here's your overview.",
 
   // ─── Studio deployment ──────────────────────────────────────────
   /**
@@ -31,7 +31,7 @@ export const clientConfig = {
    * For a brand-new client studio, leave this empty on the first deploy
    * and Sanity will prompt you to pick or create one — then paste it here.
    */
-  appId: "",
+  appId: "er1r2sq4xr80fbwy4imka53w",
 
   // ─── Live photographer site ─────────────────────────────────────
   /** Public photographer site URL (used in dashboard quick-actions) */
