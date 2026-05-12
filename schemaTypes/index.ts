@@ -19,6 +19,7 @@ import { contactPage } from "./contactPage";
 import { coupon } from "./coupon";
 // Custom schemas for the photographer studio
 import { gallery } from "./gallery";
+import { homepage } from "./homepage";
 import { lumaPrintSetV2 } from "./lumaPrintSetV2";
 import { lumaProductV2 } from "./lumaProductV2";
 import post from "./post";
@@ -28,6 +29,7 @@ import { siteSettings } from "./siteSettings";
 
 export const schemaTypes = [
   // === Custom Content Types ===
+  homepage, // Homepage splash content and CTA links
   gallery, // Photo galleries with ordering
   printCollection, // Print collections for shop
   coupon, // Discount codes

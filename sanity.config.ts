@@ -26,7 +26,7 @@ import { DashboardHome } from "./src/components/DashboardHome";
 import { EmptyState } from "./src/components/EmptyState";
 
 // Singleton document IDs — ensures only one of each exists
-const SINGLETON_TYPES = new Set(["siteSettings", "about", "contactPage"]);
+const SINGLETON_TYPES = new Set(["homepage", "siteSettings", "about", "contactPage"]);
 const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);
 
 // Document types that get stock-toggle actions (Mark sold out / Mark back in stock)
@@ -143,6 +143,11 @@ export default defineConfig({
             // ═══════════════════════════════════════
             // Content
             // ═══════════════════════════════════════
+            S.listItem()
+              .title("Homepage")
+              .schemaType("homepage")
+              .child(S.document().schemaType("homepage").documentId("homepage").title("Homepage")),
+
             orderableDocumentListDeskItem({
               type: "gallery",
               title: "Galleries",
@@ -154,20 +159,17 @@ export default defineConfig({
             S.listItem()
               .title("About")
               .schemaType("about")
-              .child(
-                S.documentTypeList("about")
-                  .title("About")
-                  .defaultOrdering([{ field: "_createdAt", direction: "desc" }]),
-              ),
+              .child(S.document().schemaType("about").documentId("about").title("About")),
 
             // Contact & Booking — singleton
             S.listItem()
               .title("Contact & Booking")
               .schemaType("contactPage")
               .child(
-                S.documentTypeList("contactPage")
-                  .title("Contact & Booking")
-                  .defaultOrdering([{ field: "_createdAt", direction: "desc" }]),
+                S.document()
+                  .schemaType("contactPage")
+                  .documentId("contactPage")
+                  .title("Contact & Booking"),
               ),
 
             S.divider(),
@@ -250,9 +252,10 @@ export default defineConfig({
               .title("Site Settings")
               .schemaType("siteSettings")
               .child(
-                S.documentTypeList("siteSettings")
-                  .title("Site Settings")
-                  .defaultOrdering([{ field: "_createdAt", direction: "desc" }]),
+                S.document()
+                  .schemaType("siteSettings")
+                  .documentId("siteSettings")
+                  .title("Site Settings"),
               ),
           ]);
       },
