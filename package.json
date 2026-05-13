@@ -27,10 +27,10 @@
     "@sanity/orderable-document-list": "^1.5.1",
     "@sanity/presentation": "^2.0.0",
     "@sanity/ui": "^3.1.14",
-    "@sanity/vision": "^5.23.0",
+    "@sanity/vision": "^5.25.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "sanity": "^5.23.0",
+    "sanity": "^5.25.0",
     "sanity-plugin-documents-pane": "^3.0.2",
     "sanity-plugin-media": "^4.2.0",
     "styled-components": "^6.4.1"

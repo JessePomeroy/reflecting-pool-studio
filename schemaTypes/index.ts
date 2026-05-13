@@ -22,6 +22,7 @@ import { gallery } from "./gallery";
 import { homepage } from "./homepage";
 import { lumaPrintSetV2 } from "./lumaPrintSetV2";
 import { lumaProductV2 } from "./lumaProductV2";
+import { modelingPage } from "./modelingPage";
 import post from "./post";
 import { printCollection } from "./printCollection";
 import { product } from "./product";
@@ -30,6 +31,7 @@ import { siteSettings } from "./siteSettings";
 export const schemaTypes = [
   // === Custom Content Types ===
   homepage, // Homepage splash content and CTA links
+  modelingPage, // Modeling & acting galleries
   gallery, // Photo galleries with ordering
   printCollection, // Print collections for shop
   coupon, // Discount codes
