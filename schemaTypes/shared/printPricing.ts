@@ -15,6 +15,7 @@ export interface MarginSummaryInput {
   wholesale: number;
   feeConfig: PrintFeeConfig;
   wholesaleLabel?: string;
+  lossLabel?: string;
 }
 
 export interface FramedMarginSummaryInput extends MarginSummaryInput {
@@ -38,6 +39,7 @@ export function buildMarginSummary({
   wholesale,
   feeConfig,
   wholesaleLabel = `Wholesale: $${wholesale.toFixed(2)}`,
+  lossLabel = "per unit",
 }: MarginSummaryInput): string {
   if (retail <= 0) {
     return `${wholesaleLabel} · set a retail price to see take-home.`;
@@ -45,7 +47,8 @@ export function buildMarginSummary({
 
   if (retail < wholesale) {
     const loss = wholesale - retail;
-    return `${wholesaleLabel} · LOSS: $${loss.toFixed(2)} per unit.`;
+    const suffix = lossLabel ? ` ${lossLabel}` : "";
+    return `${wholesaleLabel} · LOSS: $${loss.toFixed(2)}${suffix}.`;
   }
 
   const { stripeFee, platformFee, takeHome } = computeFeeBreakdown(retail, wholesale, feeConfig);

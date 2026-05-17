@@ -57,6 +57,7 @@ export function RetailPriceWithMarginForSet(props: FieldProps) {
       wholesale: totalWholesale,
       feeConfig: FEE_CONFIG,
       wholesaleLabel: `Wholesale: $${totalWholesale.toFixed(2)} ($${perPrintCost.toFixed(2)} × ${imageCount} prints)`,
+      lossLabel: "for set",
     });
   }
 
