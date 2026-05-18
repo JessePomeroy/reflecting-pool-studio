@@ -3,7 +3,7 @@
  *
  * Renders the standard Sanity number input and adds a line below showing
  * the photographer's actual take-home per unit, factoring in:
- *   - LumaPrints wholesale cost (looked up from `constants/lumaprintsCatalog.ts`)
+ *   - LumaPrints wholesale cost (looked up from `shared/printCatalog.ts`)
  *   - Stripe processing fees (default 2.9% + $0.30)
  *   - Platform fee (default 0%, override via env var for Stripe Connect)
  *
@@ -28,7 +28,7 @@
 import { Stack, Text } from "@sanity/ui";
 import type { FieldProps } from "sanity";
 import { useFormValue } from "sanity";
-import { getFrameWholesaleCost, getWholesaleCost } from "../constants/lumaprintsCatalog";
+import { getFrameWholesaleCost, getWholesaleCost } from "../shared/printCatalog";
 import {
   buildFramedMarginSummary,
   buildMarginSummary,
