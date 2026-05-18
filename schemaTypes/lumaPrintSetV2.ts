@@ -24,13 +24,13 @@
 
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { RetailPriceWithMarginForSet } from "./components/RetailPriceWithMarginForSet";
+import { canvasSizeValidation } from "./shared/canvasValidation";
 import {
   getPaperBySlug,
   getSizeBySlug,
   PAPER_DROPDOWN_OPTIONS,
   SIZE_DROPDOWN_OPTIONS,
-} from "./constants/lumaprintsCatalog";
-import { canvasSizeValidation } from "./shared/canvasValidation";
+} from "./shared/printCatalog";
 
 export const lumaPrintSetV2 = defineType({
   name: "lumaPrintSetV2",

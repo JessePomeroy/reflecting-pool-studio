@@ -21,7 +21,7 @@
 import { Stack, Text } from "@sanity/ui";
 import type { FieldProps } from "sanity";
 import { useFormValue } from "sanity";
-import { getWholesaleCost } from "../constants/lumaprintsCatalog";
+import { getWholesaleCost } from "../shared/printCatalog";
 import { buildMarginSummary } from "../shared/printPricing";
 import { FEE_CONFIG, type VariantContext } from "./RetailPriceWithMargin";
 
