@@ -13,7 +13,7 @@
  * bundle discounts vs. buying prints individually.
  *
  * Differences from V1 `printSet`:
- *   - Catalog-aware paper + size dropdowns from `lumaprintsCatalog.ts`
+ *   - Catalog-aware paper + size dropdowns from `shared/printCatalog.ts`
  *     instead of free-form `availablePapers` strings
  *   - Per-paper × size variants instead of one base price + paper overrides
  *   - Inline margin display (RetailPriceWithMarginForSet)
