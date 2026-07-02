@@ -66,7 +66,7 @@ export const about = defineType({
       rows: 5,
       group: "content",
       description:
-        "Optional plain-text bio used by the current site layout. Separate paragraphs with a blank line.",
+        "Optional plain-text bio used by layouts that do not render portable text. Separate paragraphs with a blank line.",
     }),
 
     defineField({
