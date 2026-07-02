@@ -25,17 +25,17 @@
  * `lumaProductV2` schema.
  */
 
-import { Stack, Text } from "@sanity/ui";
-import type { FieldProps } from "sanity";
-import { useFormValue } from "sanity";
-import { getFrameWholesaleCost, getWholesaleCost } from "../shared/printCatalog";
 import {
   buildFramedMarginSummary,
   buildMarginSummary,
   computeFeeBreakdown as computeFeeBreakdownWithConfig,
   type FeeBreakdown,
   type PrintFeeConfig,
-} from "../shared/printPricing";
+} from "@jessepomeroy/print-catalog/pricing";
+import { Stack, Text } from "@sanity/ui";
+import type { FieldProps } from "sanity";
+import { useFormValue } from "sanity";
+import { getFrameWholesaleCost, getWholesaleCost } from "../shared/printCatalog";
 
 export interface VariantContext {
   paper?: string;

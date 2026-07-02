@@ -18,11 +18,11 @@
  * `lumaPrintSetV2` schema.
  */
 
+import { buildMarginSummary } from "@jessepomeroy/print-catalog/pricing";
 import { Stack, Text } from "@sanity/ui";
 import type { FieldProps } from "sanity";
 import { useFormValue } from "sanity";
 import { getWholesaleCost } from "../shared/printCatalog";
-import { buildMarginSummary } from "../shared/printPricing";
 import { FEE_CONFIG, type VariantContext } from "./RetailPriceWithMargin";
 
 export function RetailPriceWithMarginForSet(props: FieldProps) {

@@ -43,6 +43,31 @@ SANITY_STUDIO_STRIPE_FEE_FIXED_CENTS=30
 
 Defaults: 0% platform fee, 2.9% + $0.30 Stripe fee.
 
+## GitHub Packages auth
+
+This Studio consumes private `@jessepomeroy/*` packages from GitHub Packages.
+The repo-level `.npmrc` maps the package scope to the GitHub registry, but it
+does not and should not contain a token.
+
+Before running `pnpm install` in a fresh local environment, write a GitHub
+Packages token with `read:packages` access into your user npm config:
+
+```bash
+pnpm config set --location user //npm.pkg.github.com/:_authToken "$GITHUB_TOKEN"
+```
+
+For CI or another hosted install, setting `NODE_AUTH_TOKEN` alone is not
+enough. The install command must write that token into npm config before
+dependency installation:
+
+```bash
+pnpm config set --location user //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN" && pnpm install --frozen-lockfile
+```
+
+`pnpm sanity deploy` builds from the current checkout, so a local deploy only
+needs the local auth setup before `pnpm install`. If a hosted deploy installs
+dependencies first, run the hosted config command above before that install.
+
 ## Local development
 
 ```bash
