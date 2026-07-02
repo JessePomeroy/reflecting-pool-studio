@@ -10,6 +10,7 @@
  * 4. Run `npx sanity deploy` to update the hosted Studio
  */
 
+import { clientConfig } from "../client.config";
 import { about } from "./about";
 import author from "./author";
 // Default blog schemas (from template)
@@ -28,10 +29,14 @@ import { printCollection } from "./printCollection";
 import { product } from "./product";
 import { siteSettings } from "./siteSettings";
 
+const optionalSchemaTypes = [
+  clientConfig.enabledSchemas.homepage ? homepage : null,
+  clientConfig.enabledSchemas.modelingPage ? modelingPage : null,
+].filter((schemaType) => schemaType !== null);
+
 export const schemaTypes = [
   // === Custom Content Types ===
-  homepage, // Homepage splash content and CTA links
-  modelingPage, // Modeling & acting galleries
+  ...optionalSchemaTypes,
   gallery, // Photo galleries with ordering
   printCollection, // Print collections for shop
   coupon, // Discount codes
