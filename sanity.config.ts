@@ -27,11 +27,11 @@ import { EmptyState } from "./src/components/EmptyState";
 
 // Singleton document IDs — ensures only one of each exists
 const SINGLETON_TYPES = new Set([
-  "homepage",
   "siteSettings",
   "about",
   "contactPage",
-  "modelingPage",
+  ...(clientConfig.enabledSchemas.homepage ? ["homepage"] : []),
+  ...(clientConfig.enabledSchemas.modelingPage ? ["modelingPage"] : []),
 ]);
 const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);
 
@@ -149,20 +149,16 @@ export default defineConfig({
             // ═══════════════════════════════════════
             // Content
             // ═══════════════════════════════════════
-            S.listItem()
-              .title("Homepage")
-              .schemaType("homepage")
-              .child(S.document().schemaType("homepage").documentId("homepage").title("Homepage")),
-
-            S.listItem()
-              .title("Modeling & Acting")
-              .schemaType("modelingPage")
-              .child(
-                S.document()
-                  .schemaType("modelingPage")
-                  .documentId("modelingPage")
-                  .title("Modeling & Acting"),
-              ),
+            ...(clientConfig.enabledSchemas.homepage
+              ? [
+                  S.listItem()
+                    .title("Homepage")
+                    .schemaType("homepage")
+                    .child(
+                      S.document().schemaType("homepage").documentId("homepage").title("Homepage"),
+                    ),
+                ]
+              : []),
 
             orderableDocumentListDeskItem({
               type: "gallery",
@@ -170,6 +166,20 @@ export default defineConfig({
               S,
               context,
             }),
+
+            ...(clientConfig.enabledSchemas.modelingPage
+              ? [
+                  S.listItem()
+                    .title("Modeling & Acting")
+                    .schemaType("modelingPage")
+                    .child(
+                      S.document()
+                        .schemaType("modelingPage")
+                        .documentId("modelingPage")
+                        .title("Modeling & Acting"),
+                    ),
+                ]
+              : []),
 
             // About — singleton (opens directly to the document)
             S.listItem()

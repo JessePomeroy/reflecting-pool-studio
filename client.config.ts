@@ -38,6 +38,17 @@ export const clientConfig = {
   liveSiteUrl: "https://reflecting-pool.vercel.app",
   /** Admin dashboard URL (used in dashboard quick-actions) */
   adminDashboardUrl: "https://reflecting-pool.vercel.app/admin",
+
+  // ─── Optional content modules ───────────────────────────────────
+  /**
+   * Enable client-specific content pages without forking the shared schema set.
+   * Keep defaults off for the base photographer template; turn these on in
+   * client studios that need the corresponding frontend routes.
+   */
+  enabledSchemas: {
+    homepage: true,
+    modelingPage: true,
+  },
 } as const;
 
 export type ClientConfig = typeof clientConfig;
