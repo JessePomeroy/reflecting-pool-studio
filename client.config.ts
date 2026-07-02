@@ -35,9 +35,9 @@ export const clientConfig = {
 
   // ─── Live photographer site ─────────────────────────────────────
   /** Public photographer site URL (used in dashboard quick-actions) */
-  liveSiteUrl: "https://example.com",
+  liveSiteUrl: "https://reflecting-pool.vercel.app",
   /** Admin dashboard URL (used in dashboard quick-actions) */
-  adminDashboardUrl: "https://example.com/admin",
+  adminDashboardUrl: "https://reflecting-pool.vercel.app/admin",
 } as const;
 
 export type ClientConfig = typeof clientConfig;
