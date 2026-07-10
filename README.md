@@ -32,16 +32,17 @@ in `client.config.ts`.
 
 ## Environment variables (optional)
 
-Create a `.env` file to override default fee calculations for studios
+Create a `.env.local` file to override default fee calculations for studios
 using Stripe Connect:
 
 ```
-SANITY_STUDIO_PLATFORM_FEE_PCT=5
-SANITY_STUDIO_STRIPE_FEE_PCT=2.9
+SANITY_STUDIO_PLATFORM_FEE_PCT=0.05
+SANITY_STUDIO_STRIPE_FEE_PCT=0.029
 SANITY_STUDIO_STRIPE_FEE_FIXED_CENTS=30
 ```
 
-Defaults: 0% platform fee, 2.9% + $0.30 Stripe fee.
+Use decimal rates, not whole percentages. Defaults: 0% platform fee,
+2.9% + $0.30 Stripe fee.
 
 ## GitHub Packages auth
 

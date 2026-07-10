@@ -14,7 +14,7 @@ content.
 
 ## Stack
 
-- **CMS:** Sanity Studio v3 (sanity 5.20+)
+- **CMS:** Sanity Studio v3 (see `package.json` for the installed version)
 - **Plugins:** `@sanity/orderable-document-list`, `@sanity/vision`, `@sanity/presentation`, `sanity-plugin-documents-pane`, `sanity-plugin-media`
 - **Linting:** Biome (check + format)
 - **Config:** All client-specific values in `client.config.ts`
