@@ -76,8 +76,11 @@ When modifying schema types, check the frontend's GROQ queries. Field renames or
 ### Singleton types need desk structure + action filter
 Add new singletons to `SINGLETON_TYPES` in `sanity.config.ts` AND create a desk structure entry.
 
-### Client config is the only file to edit per client
-All photographer-specific values live in `client.config.ts`. Schemas, components, and desk structure are shared.
+### Client runtime config stays centralized
+Photographer-specific runtime values live in `client.config.ts`; package
+identity and Sanity deployment metadata are the other expected downstream-only
+differences. Schemas, components, actions, and desk structure remain shared and
+must be changed in `../sanity-studio-template` first.
 
 ---
 
