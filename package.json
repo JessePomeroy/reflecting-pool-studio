@@ -15,9 +15,10 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
-    "lint": "biome check .",
-    "typecheck": "tsc --noEmit",
-    "check": "biome check . && tsc --noEmit && sanity build && corepack pnpm audit --audit-level low",
+    "lint": "biome check . && eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit --incremental false",
+    "test": "node --test",
+    "check": "corepack pnpm lint && corepack pnpm typecheck && corepack pnpm test && sanity build && corepack pnpm audit --audit-level low",
     "format": "biome format --write .",
     "prepare": "husky"
   },
@@ -55,7 +56,7 @@
     "singleQuote": true
   },
   "lint-staged": {
-    "*.{js,ts}": [
+    "*.{js,jsx,mjs,cjs,ts,tsx}": [
       "eslint --max-warnings=0"
     ]
   },
