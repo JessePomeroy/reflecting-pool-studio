@@ -75,7 +75,7 @@ dependencies first, run the hosted config command above before that install.
 pnpm install
 pnpm dev          # localhost:3333
 pnpm build        # build studio bundle
-pnpm lint         # biome check
+pnpm lint         # Biome and ESLint checks
 pnpm format       # biome format --write
 pnpm sanity deploy   # deploy to sanity.studio (uses pinned appId)
 ```
