@@ -18,7 +18,8 @@
     "lint": "biome check . && eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit --incremental false",
     "test": "node --test",
-    "check": "corepack pnpm lint && corepack pnpm typecheck && corepack pnpm test && sanity build && corepack pnpm audit --audit-level low",
+    "security:audit": "corepack pnpm@11.4.0 --pm-on-fail=ignore audit --audit-level low",
+    "check": "corepack pnpm lint && corepack pnpm typecheck && corepack pnpm test && sanity build && corepack pnpm run security:audit",
     "format": "biome format --write .",
     "prepare": "husky"
   },
